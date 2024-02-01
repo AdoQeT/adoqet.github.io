@@ -45,14 +45,16 @@ function fetchData() {
                     activityDiv.classList.add('activity');
 
                     const activityImage = document.createElement('img');
-
+                    
                      // Spotify aktivitesi ise
                     if (activity.type === 2 && activity.assets && activity.assets.large_image.startsWith('spotify:')) {
                         const spotifyImageId = activity.assets.large_image.split(':')[1];
                         activityImage.src = `https://i.scdn.co/image/${spotifyImageId}`;
                     } else {
                         // Diğer aktiviteler
-                        activityImage.src = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`;
+                        activityImage.src = activity.assets && activity.assets.large_image
+                        ? `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`
+                        : 'https://cdn.glitch.global/3319ca89-a9f9-4517-bdaa-0c4a50a8df48/unknown_game_img.png?v=1706792626199';
                     }
 
                     activityImage.alt = 'Activity Image';
@@ -62,13 +64,13 @@ function fetchData() {
 
                     const activityName = document.createElement('p');
                     activityName.id = 'activityName';
-                    activityName.innerText = activity.name;
+                    activityName.innerText = activity.name || 'Unknown Activity';
 
                     const activityState = document.createElement('p');
-                    activityState.innerText = activity.state;
+                    activityState.innerText = activity.state || '';
 
                     const activityDetails = document.createElement('p');
-                    activityDetails.innerText = activity.details;
+                    activityDetails.innerText = activity.details || '';
 
                     activityDetailsDiv.appendChild(activityName);
                     activityDetailsDiv.appendChild(activityState);
