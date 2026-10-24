@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 function createEl(template) {
   var el = document.createElement('div');
@@ -212,14 +212,16 @@ function cloneAndStripeElement(element, clipPathName, parent) {
     display: 'none',
     pointerEvents: 'none',
     background: '#101214',
+    zIndex: 50,
     fontSize: style.fontSize,
     fontFamily: style.fontFamily,
     color: style.color,
     textDecoration: style.textDecoration
   });
   parent.appendChild(el);
-  el.style['-webkit-clip-path'] = 'url(/#' + clipPathName + ')';
-  el.style['clip-path'] = 'url(/#' + clipPathName + ')';
+  var clipRef = 'url(' + (window.location.href.split('#')[0]) + '#' + clipPathName + ')';
+  el.style['-webkit-clip-path'] = clipRef;
+  el.style['clip-path'] = clipRef;
 
   return el;
 }
@@ -572,3 +574,4 @@ function showContent() {
     }
   }
 })();
+

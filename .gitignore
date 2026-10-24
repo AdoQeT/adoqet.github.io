@@ -1,0 +1,5 @@
+# Local clean source files (to protect un-obfuscated code from public GitHub)
+src/
+node_modules/
+.DS_Store
+Thumbs.db

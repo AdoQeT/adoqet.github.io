@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5865F2"/>
+      <stop offset="100%" stop-color="#23272A"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="50" fill="url(#avatarGrad)"/>
+  <g transform="translate(15, 15) scale(0.35)">
+    <path d="M 76.601 152.432 L 102.501 108.171 L 102.5 125.566 L 124.148 125.566 L 105.4 93.674 L 107.719 73.38 L 47.029 176.592 L 51.281 151.079 L 29.053 151.079 L 99.988 29.118 L 170.149 153.012" fill="#ffffff" fill-rule="evenodd"/>
+  </g>
+</svg>
