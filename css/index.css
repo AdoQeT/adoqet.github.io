@@ -113,10 +113,22 @@ header {
   padding-top: 14px;
 }
 
+#contact,
+#contact a,
+#contact svg,
+#contact path {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 #contact a {
   display: inline-block;
   margin: 0 4px;
   transition: transform 0.2s ease;
+  -webkit-user-drag: none;
 }
 
 #contact a:hover {
@@ -364,8 +376,8 @@ header {
 }
 
 .spotify-widget.playing {
-  border-color: rgba(29, 185, 84, 0.35);
-  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.08);
+  border-color: var(--spotify-theme-glow, rgba(29, 185, 84, 0.4));
+  box-shadow: 0 6px 24px var(--spotify-theme-subtle, rgba(29, 185, 84, 0.12));
 }
 
 .spotify-header {
@@ -382,8 +394,9 @@ header {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: #1db954;
+  color: var(--spotify-theme, #1db954);
   text-transform: uppercase;
+  transition: color 0.4s ease;
 }
 
 .spotify-wave {
@@ -395,9 +408,11 @@ header {
 
 .spotify-wave span {
   width: 3px;
-  background: #1db954;
+  background: var(--spotify-theme, #1db954);
   border-radius: 2px;
-  animation: waveAnim 1.2s ease-in-out infinite;
+  animation: waveAnim var(--spotify-beat-speed, 1.15s) ease-in-out infinite;
+  box-shadow: 0 0 6px var(--spotify-theme-glow, rgba(29, 185, 84, 0.5));
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .spotify-wave span:nth-child(1) { height: 40%; animation-delay: 0.1s; }
@@ -439,19 +454,20 @@ header {
   transform: scale(1.05);
 }
 
-/* Spotify Aura & Audio Pulse Effect */
+/* Spotify Aura & Audio Pulse Effect - Dynamic Musical Rhythm */
 .spotify-widget.playing .spotify-art-link::before {
   content: '';
   position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
   border-radius: 12px;
-  background: radial-gradient(circle, rgba(29, 185, 84, 0.6) 0%, rgba(29, 185, 84, 0) 75%);
-  animation: spotifyAuraBeat 2s ease-in-out infinite;
+  background: radial-gradient(circle, var(--spotify-theme-glow, rgba(29, 185, 84, 0.75)) 0%, rgba(0, 0, 0, 0) 75%);
+  animation: spotifyAuraBeat var(--spotify-beat-speed, 1.15s) cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
   z-index: 1;
   pointer-events: none;
+  transition: background 0.5s ease;
 }
 
 .spotify-widget.playing .spotify-art-link::after {
@@ -462,35 +478,58 @@ header {
   right: 0;
   bottom: 0;
   border-radius: 8px;
-  border: 1.5px solid rgba(29, 185, 84, 0.5);
-  animation: spotifyPulseRing 2s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  border: 1.5px solid var(--spotify-theme-glow, rgba(29, 185, 84, 0.7));
+  animation: spotifyPulseRing var(--spotify-beat-speed, 1.15s) cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
   z-index: 1;
   pointer-events: none;
+  transition: border-color 0.5s ease;
 }
 
+/* Musical kick drum / heartbeat "lub-dub" rhythm */
 @keyframes spotifyAuraBeat {
-  0%, 100% {
+  0% {
     transform: scale(0.92);
-    opacity: 0.35;
+    opacity: 0.3;
   }
-  50% {
+  14% {
     transform: scale(1.18);
-    opacity: 0.9;
-    filter: drop-shadow(0 0 10px rgba(29, 185, 84, 0.65));
+    opacity: 0.95;
+    filter: drop-shadow(0 0 14px var(--spotify-theme-glow, rgba(29, 185, 84, 0.85)));
+  }
+  28% {
+    transform: scale(1.02);
+    opacity: 0.55;
+  }
+  42% {
+    transform: scale(1.24);
+    opacity: 1;
+    filter: drop-shadow(0 0 22px var(--spotify-theme-glow, rgba(29, 185, 84, 0.95)));
+  }
+  65% {
+    transform: scale(0.97);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.92);
+    opacity: 0.3;
   }
 }
 
 @keyframes spotifyPulseRing {
   0% {
-    transform: scale(0.95);
-    opacity: 0.9;
+    transform: scale(0.92);
+    opacity: 0.95;
   }
-  65% {
-    transform: scale(1.3);
+  45% {
+    transform: scale(1.32);
+    opacity: 0.55;
+  }
+  80% {
+    transform: scale(1.52);
     opacity: 0;
   }
   100% {
-    transform: scale(1.35);
+    transform: scale(1.56);
     opacity: 0;
   }
 }
@@ -515,7 +554,7 @@ header {
 }
 
 .spotify-song:hover {
-  color: #1db954;
+  color: var(--spotify-theme, #1db954);
   text-decoration: underline;
 }
 
@@ -550,9 +589,10 @@ header {
 
 .spotify-progress-fill {
   height: 100%;
-  background: #1db954;
+  background: linear-gradient(90deg, var(--spotify-theme, #1db954), #ffffff);
   border-radius: 2px;
   transition: width 0.3s linear;
+  box-shadow: 0 0 8px var(--spotify-theme-glow, rgba(29, 185, 84, 0.6));
 }
 
 .spotify-time {
